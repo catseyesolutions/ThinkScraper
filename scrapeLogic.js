@@ -13,6 +13,7 @@ const scrapeLogic = async (res, req) => {
       "--disable-blink-features",
       "--disable-blink-features=AutomationControlled"
     ],
+    userDataDir: './tmp',
     headless: true,
     executablePath:
       process.env.NODE_ENV === "production"
