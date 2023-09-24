@@ -1,21 +1,18 @@
-const puppeteer = require("puppeteer-extra");
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
-puppeteer.use(StealthPlugin())
+const puppeteer = require("puppeteer");
 require("dotenv").config();
 
 const scrapeLogic = async (res, req) => {
+
+  puppeteer.connect({ browserWSEndpoint: 'wss://chrome.browserless.io?token=7d4132c8-06b0-4b92-b809-388609642558' })
+  
   const browser = await puppeteer.launch({
     args: [
       "--disable-setuid-sandbox",
       "--no-sandbox",
       "--single-process",
-      "--no-zygote",
-      "--disable-blink-features",
-      "--disable-blink-features=AutomationControlled"
+      "--no-zygote"
     ],
-    userDataDir: './tmp',
-    headless: false,
-    timeout: 0,
+    headless: true,
     executablePath:
       process.env.NODE_ENV === "production"
         ? process.env.PUPPETEER_EXECUTABLE_PATH
