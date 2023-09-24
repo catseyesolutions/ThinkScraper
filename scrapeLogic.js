@@ -3,21 +3,10 @@ require("dotenv").config();
 
 const scrapeLogic = async (res, req) => {
 
-  puppeteer.connect({ browserWSEndpoint: 'wss://chrome.browserless.io?token=7d4132c8-06b0-4b92-b809-388609642558' })
-  
-  const browser = await puppeteer.launch({
-    args: [
-      "--disable-setuid-sandbox",
-      "--no-sandbox",
-      "--single-process",
-      "--no-zygote"
-    ],
-    headless: true,
-    executablePath:
-      process.env.NODE_ENV === "production"
-        ? process.env.PUPPETEER_EXECUTABLE_PATH
-        : puppeteer.executablePath(),
+  const browser = await puppeteer.connect({
+    browserWSEndpoint: `wss://chrome.browserless.io?token=7d4132c8-06b0-4b92-b809-388609642558`,
   });
+  
   try {
     const page = await browser.newPage();
     await page.goto(req.query.url, { waitUntil: 'networkidle0' });
