@@ -10,8 +10,9 @@ const scrapeLogic = async (res, req) => {
       "--no-sandbox",
       "--single-process",
       "--no-zygote",
+      "--disable-blink-features",
+      "--disable-blink-features=AutomationControlled"
     ],
-    navigator.webdriver: true,
     headless: true,
     executablePath:
       process.env.NODE_ENV === "production"
@@ -20,7 +21,13 @@ const scrapeLogic = async (res, req) => {
   });
   try {
     const page = await browser.newPage();
-    await page.goto(req.query.url, { waitUntil: 'networkidle0' })
+    await page.goto(req.query.url, { waitUntil: 'networkidle0' });
+
+    await page.evaluateOnNewDocument(() => {
+        Object.defineProperty(navigator, "webdriver", {
+          get: () => false,
+        });
+    });
   
     const html = await page.content();
   
