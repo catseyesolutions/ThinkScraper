@@ -9,14 +9,8 @@ const scrapeLogic = async (res, req) => {
   
   try {
     const page = await browser.newPage();
-    await page.goto(req.query.url, { waitUntil: 'networkidle0' });
+    await page.goto(req.query.url);
 
-    await page.evaluateOnNewDocument(() => {
-        Object.defineProperty(navigator, "webdriver", {
-          get: () => false,
-        });
-    });
-  
     const html = await page.content();
   
     res.send({
