@@ -15,6 +15,7 @@ const scrapeLogic = async (res, req) => {
     ],
     userDataDir: './tmp',
     headless: false,
+    timeout: 0,
     executablePath:
       process.env.NODE_ENV === "production"
         ? process.env.PUPPETEER_EXECUTABLE_PATH
