@@ -9,8 +9,11 @@ const scrapeLogic = async (res, req) => {
   
   try {
     const page = await browser.newPage();
-    await page.goto(req.query.url);
-
+    
+    await page.goto(req.query.url, {
+      waitUntil: 'networkidle0',
+    });
+    
     const html = await page.content();
   
     res.send({
