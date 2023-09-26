@@ -10,7 +10,7 @@ const USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/
 
 const scrapeLogic = async (res, req) => {
 
-  const browser = await puppeteer.launch({headless: false});
+  const browser = await puppeteer.launch({headless: true});
   
   try {
 
@@ -33,7 +33,7 @@ const scrapeLogic = async (res, req) => {
    await page.setJavaScriptEnabled(true);
    await page.setDefaultNavigationTimeout(0);
 
-   //Skip images/styles/fonts loading for performance
+   // Skip images/styles/fonts loading for performance
    await page.setRequestInterception(true);
    page.on('request', (req) => {
        if(req.resourceType() == 'stylesheet' || req.resourceType() == 'font' || req.resourceType() == 'image'){
@@ -59,7 +59,7 @@ const scrapeLogic = async (res, req) => {
    });
 
    await page.evaluateOnNewDocument(() => {
-       //Pass notifications check
+       // Pass notifications check
        const originalQuery = window.navigator.permissions.query;
        return window.navigator.permissions.query = (parameters) => (
            parameters.name === 'notifications' ?
