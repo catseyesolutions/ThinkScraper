@@ -1,7 +1,6 @@
 const puppeteer = require("puppeteer-extra");
 const pluginStealth = require("puppeteer-extra-plugin-stealth"); 
 require("dotenv").config();
-const { createWorker } = require('tesseract.js');
 const randomUseragent = require('random-useragent');
 
 puppeteer.use(pluginStealth());
