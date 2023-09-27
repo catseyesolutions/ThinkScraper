@@ -7,9 +7,7 @@ puppeteer.use(pluginStealth());
 const USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36';
 
 const scrapeLogic = async (res, req) => {
-  
-  const randomProxy = proxies[Math.floor(Math.random() * proxies.length)]
-  
+    
   const browser = await puppeteer.launch({
     headless: true,
     args: ['--incognito', '--no-sandbox', '--disable-setuid-sandbox']
