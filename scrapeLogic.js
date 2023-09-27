@@ -3,8 +3,6 @@ const pluginStealth = require("puppeteer-extra-plugin-stealth");
 require("dotenv").config();
 const randomUseragent = require('random-useragent');
 puppeteer.use(pluginStealth());
-const devices = require('puppeteer/DeviceDescriptors');
-const iPhone = devices['iPhone 6'];
 
 const USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36';
 
@@ -32,7 +30,6 @@ const scrapeLogic = async (res, req) => {
        isMobile: false,
    });
 
-   await page.emulate(iPhone);
 
    await page.setUserAgent(UA);
    await page.setJavaScriptEnabled(true);
