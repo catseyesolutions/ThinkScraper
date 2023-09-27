@@ -10,7 +10,7 @@ const USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/
 
 const scrapeLogic = async (res, req) => {
 
-  const browser = await puppeteer.launch({headless: true, args: [ '--proxy-server=127.0.0.1:9876' ]});
+  const browser = await puppeteer.launch({headless: true});
   
   try {
 
