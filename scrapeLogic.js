@@ -4,13 +4,6 @@ require("dotenv").config();
 const randomUseragent = require('random-useragent');
 puppeteer.use(pluginStealth());
 
-// the proxies to rotate on 
-const proxies = [
-    'http://19.151.94.248:88',
-    'http://149.169.197.151:80',
-    'http://212.76.118.242:97'
-]
-
 const USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36';
 
 const scrapeLogic = async (res, req) => {
@@ -19,7 +12,7 @@ const scrapeLogic = async (res, req) => {
   
   const browser = await puppeteer.launch({
     headless: true,
-    args: [`--proxy-server=${randomProxy}`]
+    args: ['--incognito', '--no-sandbox', '--disable-setuid-sandbox']
   });
   
   try {
