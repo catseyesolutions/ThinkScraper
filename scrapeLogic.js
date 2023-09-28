@@ -3,6 +3,7 @@ const pluginStealth = require("puppeteer-extra-plugin-stealth");
 require("dotenv").config();
 const randomUseragent = require('random-useragent');
 puppeteer.use(pluginStealth());
+const fetch = require("node-fetch");
 
 const USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36';
 
@@ -11,10 +12,10 @@ const scrapeLogic = async (res, req) => {
   if (req.query.url.includes('amazon')) {
 
       const response = await fetch('http://api.scraperapi.com?api_key=e8cdb6b94f3a3ce2c01859b94a56ae34&url='+req.query.url);
-      const amazonHtml = await response.text();
+      const html = await response.text();
 
     return res.send({
-        amazonHtml
+        html
     });
   }
     
