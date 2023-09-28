@@ -30,20 +30,9 @@ const scrapeLogic = async (res, req) => {
        isMobile: false,
    });
 
-
    await page.setUserAgent(UA);
    await page.setJavaScriptEnabled(true);
    await page.setDefaultNavigationTimeout(0);
-
-   // Skip images/styles/fonts loading for performance
-   await page.setRequestInterception(true);
-   page.on('request', (req) => {
-       if(req.resourceType() == 'stylesheet' || req.resourceType() == 'font' || req.resourceType() == 'image'){
-           req.abort();
-       } else {
-           req.continue();
-       }
-   });
 
    await page.evaluateOnNewDocument(() => {
        // Pass webdriver check
