@@ -11,7 +11,7 @@ const scrapeLogic = async (res, req) => {
 
   if (req.query.url.includes('amazon')) {
 
-      const response = await fetch('http://api.scraperapi.com?api_key=e8cdb6b94f3a3ce2c01859b94a56ae34&url='+req.query.url);
+      const response = await fetch('http://api.scrape.do/?token=9e145db0cee8411b95c5e089c61a30bd144427aa6e6&url='+encodeURI(req.query.url));
       const html = await response.text();
 
     return res.send({
