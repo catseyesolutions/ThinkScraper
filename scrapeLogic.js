@@ -10,7 +10,7 @@ const scrapeLogic = async (res, req) => {
     
   const browser = await puppeteer.launch({
     headless: true,
-    args: ['--incognito', '--no-sandbox', '--disable-setuid-sandbox']
+    args: ['--incognito', '--no-sandbox', '--disable-setuid-sandbox', '--auto-open-devtools-for-tabs']
   });
   
   try {
