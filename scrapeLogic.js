@@ -34,6 +34,14 @@ const scrapeLogic = async (res, req) => {
    await page.setJavaScriptEnabled(false);
    await page.setDefaultNavigationTimeout(0);
 
+    await page.on("request", request => {
+      if (request.resourceType() === "script") {
+      request.abort()
+      } else {
+        request.continue()
+      }
+    });
+
    await page.evaluateOnNewDocument(() => {
        // Pass webdriver check
        Object.defineProperty(navigator, 'webdriver', {
