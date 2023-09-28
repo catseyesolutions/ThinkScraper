@@ -31,7 +31,7 @@ const scrapeLogic = async (res, req) => {
    });
 
    await page.setUserAgent(UA);
-   await page.setJavaScriptEnabled(true);
+   await page.setJavaScriptEnabled(false);
    await page.setDefaultNavigationTimeout(0);
 
    await page.evaluateOnNewDocument(() => {
