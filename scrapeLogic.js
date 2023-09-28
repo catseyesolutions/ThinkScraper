@@ -30,6 +30,8 @@ const scrapeLogic = async (res, req) => {
    const userAgent = randomUseragent.getRandom();
    const UA = userAgent || USER_AGENT;
    const page = await browser.newPage();
+    
+   await page.setRequestInterception(True);
 
    //Randomize viewport size
    await page.setViewport({
