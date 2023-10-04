@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 //initialize the WebSocket server instance
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: 1000 });
 
 wss.on('connection', (ws) => {
    ws.on('message', function incoming(message) {
