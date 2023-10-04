@@ -1,6 +1,6 @@
 const express = require("express");
 const http = require("http");
-const WebSocket = require("ws");
+const WebSocketServer = require("ws");
 
 const { scrapeLogic } = require("./scrapeLogic");
 const app = express();
@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 //initialize the WebSocket server instance
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocketServer({ server });
 
 wss.on('connection', (ws) => {
 
