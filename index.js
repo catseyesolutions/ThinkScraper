@@ -1,10 +1,9 @@
 const express = require("express");
 const http = require("http");
 const WebSocket = require("ws");
-
+const cors = require('cors')
 const { scrapeLogic } = require("./scrapeLogic");
 const app = express();
-
 const server = http.createServer(app);
 
 const PORT = process.env.PORT || 4000;
@@ -18,7 +17,14 @@ app.get("/", (req, res) => {
 });
 
 //initialize the WebSocket server instance
-const wss = new WebSocket.Server({ noServer: true });
+app.use(cors())
+
+const verifyClient = (info) => {
+  console.log('ding dong')
+  return true
+}
+
+const wss = new WebSocket.Server({ server, verifyClient });
 
 wss.on('connection', (ws) => {
    ws.on('message', function incoming(message) {
