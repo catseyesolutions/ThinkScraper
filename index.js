@@ -1,6 +1,6 @@
 const express = require("express");
 const http = require("http");
-const WebSocketServer = require("ws");
+const WebSocket = require("ws");
 
 const { scrapeLogic } = require("./scrapeLogic");
 const app = express();
@@ -18,22 +18,16 @@ app.get("/", (req, res) => {
 });
 
 //initialize the WebSocket server instance
-const wss = new WebSocketServer({ server });
+const wss = new WebSocket.Server({ port: 8080 });
 
 wss.on('connection', (ws) => {
-
-   console.log('established');
-
-    //connection is up
-    ws.on('message', (message) => {
-
-        //log the received message and send it back to the client
-        console.log('received: %s', message);
-        ws.send(`Hello, you sent -> ${message}`);
+   ws.on('message', function incoming(message) {
+    wss.clients.forEach(function each(client) {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        client.send(message);
+      }
     });
-
-    //send immediatly a feedback to the incoming connection    
-    ws.send('Hi there, I am a WebSocket server');
+  });
 });
 
 
