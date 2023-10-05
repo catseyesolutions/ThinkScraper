@@ -2,9 +2,10 @@ const express = require("express");
 const http = require("http");
 const cors = require("cors");
 const WebSocket = require("ws");
-
 const { scrapeLogic } = require("./scrapeLogic");
 const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 app.use(cors);
 
