@@ -9,8 +9,6 @@ const io = require('socket.io')(server);
 
 app.use(cors);
 
-const server = http.createServer(app);
-
 const PORT = process.env.PORT || 4000;
 
 app.get("/scrape", (req, res) => {
