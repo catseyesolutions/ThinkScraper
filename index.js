@@ -4,6 +4,7 @@ const cors = require("cors");
 const WebSocket = require("ws");
 const { scrapeLogic } = require("./scrapeLogic");
 const app = express();
+const server = http.createServer(app);
 
 app.use(cors);
 
