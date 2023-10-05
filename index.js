@@ -42,6 +42,9 @@ app.get("/update", (req, res) => {
   pusher.trigger("update", "update", {
     message: "update"
   });
+  
+  res.status(200);
+  
 });
 
 app.listen(PORT, () => {
