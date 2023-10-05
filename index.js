@@ -1,6 +1,8 @@
 const express = require("express");
 const http = require("http");
 const WebSocket = require("ws");
+var Pusher = require("pusher");
+
 const { scrapeLogic } = require("./scrapeLogic");
 const app = express();
 
@@ -29,6 +31,18 @@ wss.on('connection', (ws) => {
   });
 });
 
+app.get("/update", (req, res) => {
+  const pusher = new Pusher({
+    appId: "1682129",
+    key: "ab6eacbc1743d9302ed1",
+    secret: "6efc66acc7a7572fbada",
+    cluster: "eu",
+  });
+  
+  pusher.trigger("update", "update", {
+    message: "update"
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
