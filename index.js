@@ -1,14 +1,13 @@
 const express = require("express");
 const http = require("http");
-const cors = require("cors");
 const WebSocket = require("ws");
+var Pusher = require("pusher");
 const { scrapeLogic } = require("./scrapeLogic");
 const app = express();
+
 const server = http.createServer(app);
 
-app.use(cors);
-
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 app.get("/scrape", (req, res) => {
   scrapeLogic(res, req);
@@ -30,6 +29,21 @@ wss.on('connection', (ws) => {
     });
   });
 });
+
+app.get("/update", (req, res) => {
+  const pusher = new Pusher({
+    appId: "1682129",
+    key: "ab6eacbc1743d9302ed1",
+    secret: "6efc66acc7a7572fbada",
+    cluster: "eu",
+  });
+  
+  pusher.trigger("think", "update", {
+    message: "hello world"
+  });
+  
+});
+
 
 
 app.listen(PORT, () => {
