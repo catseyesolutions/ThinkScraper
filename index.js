@@ -43,7 +43,9 @@ app.get("/update", (req, res) => {
     message: "update"
   });
   
-  res.status(200);
+  res.json({
+    success: true
+  });
   
 });
 
