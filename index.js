@@ -33,6 +33,13 @@ wss.on('connection', (ws) => {
   });
 });
 
+io.on('connection', (socket) => {
+  console.log('user connected');
+  socket.on('disconnect', function () {
+    console.log('user disconnected');
+  });
+})
+
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
